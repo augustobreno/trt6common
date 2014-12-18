@@ -1,4 +1,4 @@
-package br.jus.trt.lib.common_tests.cdi;
+package br.jus.trt.lib.common_tests.arquillian;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
