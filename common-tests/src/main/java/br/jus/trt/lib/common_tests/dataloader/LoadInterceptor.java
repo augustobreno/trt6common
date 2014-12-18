@@ -96,7 +96,7 @@ public abstract class LoadInterceptor implements Serializable {
 		// carregando scripts
 		String[] scripts = loadData.sql();
 		for (String script : scripts) {
-			DataLoaderSQL scriptDataLoader = CDI.getInstance().lookup(DataLoaderSQL.class);
+			DataLoaderSQL scriptDataLoader = CDI.lookup(DataLoaderSQL.class);
 			scriptDataLoader.setScriptPath(script);
 			
 			DataLoaderPrecedence dataLoader = new DataLoaderPrecedence(loadData.precedence(), scriptDataLoader);
@@ -106,7 +106,7 @@ public abstract class LoadInterceptor implements Serializable {
 		// carregando beans
 		Class<? extends DataLoader>[] beans = loadData.dataLoader();
 		for (Class<? extends DataLoader> dataLoaderType : beans) {
-			DataLoader beanDataLoader = CDI.getInstance().lookup(dataLoaderType);
+			DataLoader beanDataLoader = CDI.lookup(dataLoaderType);
 			
 			DataLoaderPrecedence dataLoader = new DataLoaderPrecedence(loadData.precedence(), beanDataLoader);
 			loaders.add(dataLoader);

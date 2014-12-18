@@ -9,9 +9,6 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.runner.RunWith;
-
-import br.jus.trt.lib.common_tests.cdi.CdiJUnitRunner;
 
 /**
  * Classe base com comportamento comum para testes unitários que utilizam um
@@ -20,7 +17,7 @@ import br.jus.trt.lib.common_tests.cdi.CdiJUnitRunner;
  * @author Augusto
  * 
  */
-@RunWith(CdiJUnitRunner.class)
+//@RunWith(CdiJUnitRunner.class)
 @Ignore
 public abstract class TestBase {
 

@@ -2,8 +2,7 @@ package br.jus.trt.lib.common_tests.cdi;
 
 import java.lang.annotation.Annotation;
 
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
+import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 /**
  * Bean de acesso ao container do CDI em uso no ambiente de testes. 
@@ -11,61 +10,29 @@ import org.jboss.weld.environment.se.WeldContainer;
  */
 public class CDI {
 
-    private Weld weld;
-    private WeldContainer container;
-    
-    private static CDI instance;
-    
-    protected CDI() {
-        this.weld = new Weld();
-        this.container = weld.initialize();
-    }
-    
-    /**
-     * @return Singleton.
-     */
-    public static CDI getInstance() {
-    	if (instance == null) {
-    		instance = new CDI();
-    	}
-    	return instance;
-    }
-
-	public Weld getWeld() {
-		return weld;
-	}
-
-	/**
-	 * @return Container de injeção de dependências do CDI.
-	 */
-	public WeldContainer getContainer() {
-		return container;
-	}
-	
    /**
     * Delegate method para operação que recupera uma instância de um determinado bean no CDI.
     * 
     * @param <T> Tipo do bean.
-    * @param subtype Um {@link java.lang.Class} representando o tipo desejado.
+    * @param type Um {@link java.lang.Class} representando o tipo desejado.
     * @param qualifiers Qualificadores para seleção (se necessário)
     * @return A instância.
     * 
     */
-   public <T> T lookup(Class<T> subtype, Annotation... qualifiers) {
-	   return getContainer().instance().select(subtype, qualifiers).get();
+   public static <T> T lookup(Class<T> type, Annotation... qualifiers) {
+	   return BeanProvider.getContextualReference(type, qualifiers);
    }
    
    /**
     * Delegate method para operação que recupera uma instância de um determinado bean no CDI.
     * 
     * @param <T> Tipo do bean.
-    * @param subtype Um {@link java.lang.Class} representando o tipo desejado.
-    * @param qualifiers Qualificadores para seleção (se necessário)
+    * @param type Um {@link java.lang.Class} representando o tipo desejado.
     * @return A instância.
     * 
     */
-   public <T> T lookup(Class<T> subtype) {
-	   return getContainer().instance().select(subtype).get();
+   public static <T> T lookup(Class<T> type) {
+	   return BeanProvider.getContextualReference(type);
    }
     
 }
